@@ -1,6 +1,6 @@
 #! /bin/zsh
 
-. user.conf
+. "/scripts/user.conf"
 
 # Variables loaded from the user.conf file
 HOSTNAME=$hostname
@@ -10,6 +10,14 @@ TIMEZONE=$timezone
 # This will be hardcoded until i find out a nice way to load arrays from a .conf file
 LANGUAGES=(en_US pt_BR)
 KEYMAP=$keymap
+
+echo '----------------------------'
+echo "HOSTNAME: ${HOSTNAME}" 
+echo "USER: ${USER}" 
+echo "PASSWORD: ${PASSWORD}" 
+echo "TIMEZONE: ${TIMEZONE}" 
+echo "KEYMAP: ${KEYMAP}" 
+echo '----------------------------'
 
 # Generate localization for every language in the LANGUAGES array
 for lang in ${LANGUAGES[@]}

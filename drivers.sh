@@ -38,7 +38,7 @@ if [[ $threed_controller = "NVIDIA" ]]; then
 	pactrap /mnt ${prime_drivers[@]}
 fi
 
-case $vga_controller of
+case $vga_controller in
 	"Intel")
 		echo "---------- Detected Intel VGA compatible controller ----------"
 		echo "---------- Installing Intel Graphics drivers ----------"

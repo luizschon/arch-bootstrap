@@ -5,7 +5,7 @@ usage() {
 # Fetch opts
 while getopts "d" o; do
 	case $o in
-		"d") D_PACKAGES=1
+		"d") D_PACKAGES=1 ;;
 		*)   usage ;;
 	esac
 done
@@ -18,6 +18,14 @@ SWAP_PART=$swap_partition
 HOME_PART=$home_partition
 VAR_PART=$var_partition
 EFI_PART=$efi_partition
+
+echo '----------------------------'
+echo "ROOT: ${ROOT_PART}" 
+echo "EFI: ${EFI_PART}" 
+echo "SWAP: ${SWAP_PART}" 
+echo "HOME: ${HOME_PART}" 
+echo "VAR: ${VAR_PART}" 
+echo '----------------------------'
 
 mount $ROOT_PART /mnt
 [[ -n $SWAP_PART ]] && swapon $SWAP_PART
@@ -99,7 +107,7 @@ zsh drivers.sh
 
 SCRIPT_DIR=/mnt/scripts
 mkdir -p $SCRIPT_DIR
-mv chroot.sh xorg.sh $SCRIPT_DIR
+mv chroot.sh xorg.sh user.conf $SCRIPT_DIR
 arch-chroot /mnt zsh /scripts/chroot.sh
 
 rm -r /mnt/scripts
