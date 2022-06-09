@@ -48,9 +48,9 @@ basic_packages=(
 )
 
 shell_packages=(
-	"zsh" "zsh-completion"
+	"zsh" "zsh-completions"
 	"tmux" "htop"
-	"openssh" "wget" "curl" "json-pp"
+	"openssh" "wget" "curl"
 	"zip" "unzip" "p7zip"
 	"git" "neovim"
 )
