@@ -103,11 +103,9 @@ fi
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-zsh drivers.sh
-
 SCRIPT_DIR=/mnt/scripts
 mkdir -p $SCRIPT_DIR
-mv chroot.sh xorg.sh user.conf $SCRIPT_DIR
+mv chroot.sh drivers.sh xorg.sh user.conf $SCRIPT_DIR
 arch-chroot /mnt zsh /scripts/chroot.sh
 
 rm -r /mnt/scripts

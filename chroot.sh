@@ -44,8 +44,12 @@ systemctl enable bluetooth.service
 # Install Intel Microcode
 cpu_vendor=$(lscpu | grep Vendor | awk '{print $3}')
 if [ $cpu_vendor = "GenuineIntel" ]; then
+	# ------- GenuineIntel processor detected -------
 	pacman -S intel-ucode
 fi
+
+# Install graphical drivers
+zsh drivers.sh
 
 # Generate GRUB configuration
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
