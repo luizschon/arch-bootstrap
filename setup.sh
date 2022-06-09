@@ -46,6 +46,7 @@ essential_packages=(
 basic_packages=(
 	"man-db" "man-pages"
 	"networkmanager" 
+	"grub" "efibootmgr"
 	"sudo"
 )
 
@@ -108,7 +109,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 SCRIPT_DIR=/mnt/scripts
 mkdir -p $SCRIPT_DIR
 mv chroot.sh drivers.sh xorg.sh user.conf $SCRIPT_DIR
-arch-chroot /mnt zsh /scripts/chroot.sh $ROOT_PART
+arch-chroot /mnt zsh /scripts/chroot.sh
 
 rm -r /mnt/scripts
 
