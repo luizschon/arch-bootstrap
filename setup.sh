@@ -10,7 +10,7 @@ while getopts "d" o; do
 	esac
 done
 
-. partitions.conf
+. "./partitions.conf"
 
 # Variables from the partitions.conf file
 ROOT_PART=$root_partition
