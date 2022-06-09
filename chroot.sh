@@ -49,7 +49,7 @@ if [ $cpu_vendor = "GenuineIntel" ]; then
 fi
 
 # Install graphical drivers
-zsh drivers.sh
+zsh /scripts/drivers.sh
 
 # Generate GRUB configuration
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
