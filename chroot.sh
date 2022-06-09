@@ -43,7 +43,7 @@ systemctl enable bluetooth.service
 
 # Install Intel Microcode
 cpu_vendor=$(lscpu | grep Vendor | awk '{print $3}')
-if [ $cpu_vendor = "GenuineIntel" ]; then
+if [[ $cpu_vendor = "GenuineIntel" ]]; then
 	# ------- GenuineIntel processor detected -------
 	pacman -S intel-ucode
 fi

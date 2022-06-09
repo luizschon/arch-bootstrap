@@ -22,14 +22,14 @@ universal_drivers=(
 	"mesa"
 )
 
-IS_NVIDIA=$false
+IS_NVIDIA=false
 threed_controller=$(lspci | grep '3D' | sed 's/^.*: //' | awk '{print $1}')
 vga_controller=$(lspci | grep 'VGA' | sed 's/^.*: //' | awk '{print $1}')
 
 if [[ $threed_controller = "NVIDIA" ]]; then
 	echo "---------- Detected NVIDIA 3D controller ----------"
 	echo "---------- Installing NVIDIA and PRIME drivers ----------"
-	IS_NVIDIA=$true
+	IS_NVIDIA=true
 	pacman -S ${prime_drivers[@]}
 fi
 
@@ -43,7 +43,7 @@ case $vga_controller in
 		echo "---------- Detected NVIDIA VGA compatible controller ----------"
 		echo "---------- Installing NVIDIA drivers ----------"
 		pacman -S ${nvidia_drivers[@]}
-		IS_NVIDIA=$true
+		IS_NVIDIA=true
 		;;
 	*)
 		if [ -n $vga_controller ]; then
@@ -55,7 +55,7 @@ case $vga_controller in
 		;;
 esac
 
-if [ $IS_NVIDIA ]; then
+if [ "$IS_NVIDIA" = true ]; then
 	echo "------- Creating NVIDIA pacman hook and kernel param -------"
 	# Creates NVIDIA pacman hook
 	cat > /etc/pacman.d/hooks/nvidia.hook << EOF
