@@ -2,10 +2,12 @@ usage() {
 	echo "Lel"
 }
 
+D_PACKAGES=$false
+
 # Fetch opts
 while getopts "d" o; do
 	case $o in
-		"d") D_PACKAGES=1 ;;
+		"d") D_PACKAGES=$true ;;
 		*)   usage ;;
 	esac
 done
@@ -97,7 +99,7 @@ all_packages=(
 
 pacstrap /mnt ${all_packages[@]}
 
-if [ -n ${D_PACKAGES} ]; then
+if [ $D_PACKAGES ]; then
 	pacstrap /mnt ${demanding_packages[@]}
 fi
 
