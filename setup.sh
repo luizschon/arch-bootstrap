@@ -36,7 +36,7 @@ mount $ROOT_PART /mnt
 [[ -n $VAR_PART ]] && mount --mkdir $VAR_PART /mnt/var
 [[ -n $EFI_PART ]] && mount --mkdir $EFI_PART /mnt/boot
 
-timadatectl set-ntp true
+timedatectl set-ntp true
 
 essential_packages=(
 	"base" "base-devel"
