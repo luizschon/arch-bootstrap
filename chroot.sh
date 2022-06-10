@@ -41,12 +41,6 @@ systemctl enable NetworkManager
 systemctl enable lightdm.service
 systemctl enable bluetooth.service
 
-# Install Intel Microcode
-cpu_vendor=$(lscpu | grep Vendor | awk '{print $3}')
-if [[ $cpu_vendor == "GenuineIntel" ]]; then
-	# ------- GenuineIntel processor detected -------
-	pacman -S intel-ucode
-fi
 
 # Install graphical drivers
 zsh /scripts/drivers.sh
@@ -65,12 +59,16 @@ EOF
 
 cat > /boot/loader/entries/arch.conf << EOF
 title   Arch Linux
-linux	/vmlinux-linux
+linux	/vmlinuz-linux
 initrd  /initramfs-linux.img
 options root=PARTUUID=${PARTUUID} rw
 EOF
 
-if [[ $cpu_vendor == "GenuineIntel" ]]; then
+# Install Intel Microcode
+cpu_vendor=$(lscpu | grep Vendor | awk '{print $3}')
+if [[ ${cpu_vendor} = "GenuineIntel" ]]; then
+	# ------- GenuineIntel processor detected -------
+	pacman --noconfirm -S intel-ucode
 	sed -i -e '3i initrd	/intel-ucode.img' /boot/loader/entries/arch.conf
 fi
 
