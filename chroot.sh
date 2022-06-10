@@ -41,6 +41,8 @@ systemctl enable NetworkManager
 systemctl enable lightdm.service
 systemctl enable bluetooth.service
 
+# Install packages
+zsh /scripts/packages.sh
 
 # Install graphical drivers
 zsh /scripts/drivers.sh
@@ -72,9 +74,11 @@ if [[ ${cpu_vendor} = "GenuineIntel" ]]; then
 	sed -i -e '3i initrd	/intel-ucode.img' /boot/loader/entries/arch.conf
 fi
 
-# Create wheel user
-sed -i 's/# \(%wheel ALL=(ALL) ALL\)/\1/' /etc/sudoers
+# Uncomments first line where the '%wheel' pattern is found
+# A.K.A.: %wheel ALL=(ALL:ALL) ALL
+sed -i '0,/%wheel/s/^# //' /etc/sudoers
 
+# Create wheel user
 useradd -mG wheel,storage,power,video,audio $USER
 echo "$USER:$PASSWORD" | chpasswd
 
