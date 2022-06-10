@@ -2,7 +2,6 @@ usage() {
 	echo "Lel"
 }
 
-
 D_PACKAGES=false
 
 # Fetch opts
@@ -44,70 +43,23 @@ essential_packages=(
 )
 
 basic_packages=(
-	"man-db" "man-pages"
+	"man-db" "man-pages" "texinfo"
 	"networkmanager" 
 	"sudo"
-)
-
-shell_packages=(
-	"zsh" "zsh-completions"
-	"tmux" "htop"
-	"openssh" "wget" "curl"
-	"zip" "unzip" "p7zip"
-	"git" "neovim"
-)
-
-gui_packages=(
-	"xorg" "xdg-user-dirs"
-	"lightdm" "lightdm-gtk-greeter"
-	"i3-gaps"
-	"rofi"
-	"nautilus"
-	"kitty"
-	"firefox" "chromium"
-	"emacs"
-	"discord"
-	"vlc"
-)
-
-multimedia_packages=(
-	"pipewire"
-	"pipewire-pulse"
-	"bluez"
-	"bluez-utils"
-	"pavucontrol"
-)
-
-development_packages=(
-	"rust"
-	"gcc" "cmake" "clang" "gdb"
-	"python" "python-pip"
-)
-
-demanding_packages=(
-	"steam" "lutris" "blender"
 )
 
 all_packages=(
 	${essential_packages[@]}
 	${basic_packages[@]}
-	${shell_packages[@]}
-	${gui_packages[@]}
-	${multimedia_packages[@]}
-	${development_packages[@]}
 )
 
 pacstrap /mnt ${all_packages[@]}
-
-if [ "$D_PACKAGES" = true ]; then
-	pacstrap /mnt ${demanding_packages[@]}
-fi
 
 genfstab -U /mnt >> /mnt/etc/fstab
 
 SCRIPT_DIR=/mnt/scripts
 mkdir -p $SCRIPT_DIR
-mv chroot.sh drivers.sh xorg.sh user.conf $SCRIPT_DIR
+mv chroot.sh packages.sh drivers.sh xorg.sh user.conf $SCRIPT_DIR
 arch-chroot /mnt zsh /scripts/chroot.sh $ROOT_PART
 
 rm -r /mnt/scripts
