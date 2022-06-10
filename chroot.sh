@@ -35,7 +35,7 @@ ln -sf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
 hwclock --systohc
 systemctl enable systemd-timesyncd
 
-# Enable required
+# Enable required services
 systemctl enable fstrim.timer
 systemctl enable NetworkManager
 systemctl enable lightdm.service
@@ -43,7 +43,7 @@ systemctl enable bluetooth.service
 
 # Install Intel Microcode
 cpu_vendor=$(lscpu | grep Vendor | awk '{print $3}')
-if [[ $cpu_vendor = "GenuineIntel" ]]; then
+if [[ $cpu_vendor == "GenuineIntel" ]]; then
 	# ------- GenuineIntel processor detected -------
 	pacman -S intel-ucode
 fi
@@ -51,14 +51,34 @@ fi
 # Install graphical drivers
 zsh /scripts/drivers.sh
 
-# Generate GRUB configuration
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-grub-mkconfig -o /boot/grub/grub.cfg
+# Install and configure systemd-boot
+bootctl install
+
+ROOT_PART=$1
+PARTUUID=$(blkid -s PARTUUID -o value ${ROOT_PART})
+
+cat > /boot/loader/loader.conf << EOF
+default  arch.conf
+timeout  4
+editor   no
+EOF
+
+cat > /boot/loader/entries/arch.conf << EOF
+title   Arch Linux
+linux	/vmlinux-linux
+initrd  /initramfs-linux.img
+options root=PARTUUID=${PARTUUID} rw
+EOF
+
+if [[ $cpu_vendor == "GenuineIntel" ]]; then
+	sed -i -e '3i initrd	/intel-ucode.img' /boot/loader/entries/arch.conf
+fi
 
 # Create wheel user
+sed -i 's/# \(%wheel ALL=(ALL) ALL\)/\1/' /etc/sudoers
+
 useradd -mG wheel,storage,power,video,audio $USER
 echo "$USER:$PASSWORD" | chpasswd
-sed -i 's/# \(%wheel ALL=(ALL) ALL\)/\1/' /etc/sudoers
 
 zsh /scripts/xorg.sh
 
