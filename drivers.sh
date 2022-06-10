@@ -30,25 +30,25 @@ if [[ $threed_controller = "NVIDIA" ]]; then
 	echo "---------- Detected NVIDIA 3D controller ----------"
 	echo "---------- Installing NVIDIA and PRIME drivers ----------"
 	IS_NVIDIA=true
-	pacman -S ${prime_drivers[@]}
+	pacman --noconfirm -S ${prime_drivers[@]}
 fi
 
 case $vga_controller in
 	"Intel")
 		echo "---------- Detected Intel VGA compatible controller ----------"
 		echo "---------- Installing Intel Graphics drivers ----------"
-		pacman -S ${intel_drivers[@]}
+		pacman --noconfirm -S ${intel_drivers[@]}
 		;;
 	"NVIDIA")
 		echo "---------- Detected NVIDIA VGA compatible controller ----------"
 		echo "---------- Installing NVIDIA drivers ----------"
-		pacman -S ${nvidia_drivers[@]}
+		pacman --noconfirm -S ${nvidia_drivers[@]}
 		IS_NVIDIA=true
 		;;
 	*)
 		if [ -n $vga_controller ]; then
 			echo "---------- Installing universal drivers ----------"
-			pacman -S ${universal_drivers[@]}
+			pacman --noconfirm -S ${universal_drivers[@]}
 	lspci | grep '3D' | sed 's/^.*: //' | awk '{print $1}'	else
 			echo "---------- No VGA compatible controller detected ----------"
 		fi
