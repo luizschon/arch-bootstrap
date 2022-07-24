@@ -27,5 +27,5 @@ $ curl -L https://github.com/luizschonarth/arch-bootstrap/archive/grub.tar.gz | 
 Modify the `partitions.conf` and `user.conf` files to your liking and run:
 
 ```
-$ zsh setup.sh
+$ zsh /scripts/setup.sh
 ```
