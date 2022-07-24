@@ -13,13 +13,15 @@ Make sure you are using the GPT layout. You can use the `gdisk` tool to generate
 To download the [systemd-boot](https://wiki.archlinux.org/title/Systemd-boot) version of the script, use the following command:
 
 ```
-$ curl -L https://github.com/luizschonarth/arch-bootstrap/archive/systemd-boot.tar.gz | tar -xz --strip-component=1
+$ mkdir -p /scripts
+$ curl -L https://github.com/luizschonarth/arch-bootstrap/archive/systemd-boot.tar.gz | tar -xz --strip-component=1 -C /scripts
 ```
 
 If you plan on using [GRUB](https://wiki.archlinux.org/title/GRUB) as your boot manager, use the following:
 
 ```
-$ curl -L https://github.com/luizschonarth/arch-bootstrap/archive/grub.tar.gz | tar -xz --strip-component=1
+$ mkdir -p /scripts
+$ curl -L https://github.com/luizschonarth/arch-bootstrap/archive/grub.tar.gz | tar -xz --strip-component=1 -C /scripts
 ```
 
 Modify the `partitions.conf` and `user.conf` files to your liking and run:
