@@ -12,6 +12,8 @@ fi
 
 shell_packages=(
 	"zsh" "zsh-completions"
+	"zsh-autosuggestion"
+	"zsh-syntax-highlighting"
 	"tmux" "htop"
 	"openssh" "wget" "curl"
 	"zip" "unzip" "p7zip"
@@ -56,10 +58,11 @@ all_packages=(
 )
 
 pacman -Sy
+pacman --noconfirm -S archlinux-keyring
 pacman --noconfirm -S ${all_packages[@]}
 
 gaming_packages=(
-	"steam", "blender"
+	"steam" "blender"
 )
 
 if [ $GAMING = true ]; then
