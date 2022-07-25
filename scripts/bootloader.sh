@@ -9,7 +9,7 @@ elif [[ ${cpu_vendor} = "AuthenticAMD" ]]; then
 	pacman --noconfirm -S amd-ucode
 fi
 
-$root_partition=$1
+root_partition=$1
 
 if [ $GRUB = true ]; then
 	# Install and configure GRUB
