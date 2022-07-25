@@ -11,7 +11,6 @@ Make sure you are using the GPT layout. You can use the `gdisk` tool to generate
 ## How to use
 
 Download and extract the bootstrap scripts into the Arch Linux live image:
-To download the [systemd-boot](https://wiki.archlinux.org/title/Systemd-boot) version of the script, use the following command:
 
 ```
 $ curl -L https://github.com/luizschonarth/arch-bootstrap/archive/current.tar.gz | tar -xz --strip-component=1
