@@ -51,7 +51,7 @@ zsh /scripts/system_config.sh
 sed -i '0,/%wheel/s/^# //' /etc/sudoers
 
 # Create wheel user
-useradd -mG wheel,storage,power,video,audio $USER
+useradd -mG wheel,storage,power,video,audio $username
 echo "$username:$password" | chpasswd
 
 # disable root login
