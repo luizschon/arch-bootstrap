@@ -6,6 +6,8 @@ rm -r ./yay
 
 aur_packages=(
 	"spotify" "nvm"
+	"ttf-ms-win10-auto"
+	"ttf-fixedsys-excelsior-linux"
 )
 
 yay --noconfirm -S ${aur_packages[@]}

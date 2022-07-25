@@ -43,11 +43,17 @@ development_packages=(
 	"python" "python-pip"
 )
 
+font_packages=(
+	"ttf-cascadia-code"
+	"ttf-font_awesome"
+)
+
 all_packages=(
 	${shell_packages[@]}
 	${gui_packages[@]}
 	${multimedia_packages[@]}
 	${development_packages[@]}
+	${font_packages[@]}
 )
 
 pacman --noconfirm -S ${all_packages[@]}
