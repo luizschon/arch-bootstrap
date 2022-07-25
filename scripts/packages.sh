@@ -18,16 +18,19 @@ shell_packages=(
 	"openssh" "wget" "curl"
 	"zip" "unzip" "p7zip"
 	"git" "neovim" "vim"
+	"python-pywal"
+	"keychain" "brightnessctl"
 )
 
 gui_packages=(
-	"xorg" "xdg-user-dirs"
+	"xorg" "xdg-user-dirs" "picom"
 	"lightdm" "lightdm-gtk-greeter"
 	"i3-gaps" "polybar" "rofi"
 	"nautilus" "feh"
 	"kitty" "alacritty"
 	"firefox" "chromium"
 	"discord" "vlc"
+	"network-manager-applet"
 )
 
 multimedia_packages=(
