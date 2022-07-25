@@ -1,5 +1,14 @@
 print_help() {
-	echo "Usage: $0 [OPTIONS]"
+	echo ""
+	echo "Usage: zsh $ZSH_ARGZERO [OPTIONS]"
+	echo ""
+	echo "\t--aur            => Install yay and AUR packages from aur.sh"
+	echo "\t-d | --dotfiles  => Install dotfiles from https://github.com/luizschonarth/dotfiles (this is a personal script afterall :P)"
+	echo "\t-g | --grub      => Set GRUB as the bootloader of choice instead of systemd-boot"
+	echo "\t--gaming         => Configures system use multilib and install some gaming packages"
+	echo "\t-h | --help      => Print this help message"
+	echo "\t-v | --verbose   => Enable verbose mode to print some debug information"
+	echo ""
 }
 
 # Parse short and long opts
