@@ -1,5 +1,5 @@
 # Install Intel/AMD Microcode
-cpu_vendor=$(lscpu | grep Vendor | awk '{print $3}')
+cpu_vendor=$(lscpu | perl -ne 'print "$1" if /^Vendor ID:[^a-zA-Z]*(.*)/')
 
 if [[ ${cpu_vendor} = "GenuineIntel" ]]; then
 	# ------- GenuineIntel processor detected -------
@@ -17,10 +17,11 @@ if [ $GRUB = true ]; then
 	grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 
 	# Adds NVIDIA modesetting kernel parameter to grub configuration file
-	if [[ -n $IS_NVIDIA ]] && sed -i '/GRUB_CMDLINE_LINUX_DEFAULT/ s/"$/ nvidia-drm.modeset=1"/' /etc/default/grub
+	if [ $IS_NVIDIA = true ]; then
+		sed -i '/GRUB_CMDLINE_LINUX_DEFAULT/ s/"$/ nvidia-drm.modeset=1"/' /etc/default/grub
+	fi
 
 	grub-mkconfig -o /boot/grub/grub.cfg
-	
 else
 	# Install and configure systemd-boot
 	bootctl install
@@ -47,7 +48,9 @@ EOF
 	fi
 
 	# Adds NVIDIA modesetting kernel parameter to systemd-boot configuration file
-	sed -i 's/\(^options.*\)/\1 nvidia-drm.modeset=1/' /boot/loader/entries/arch.conf
+	if [ $IS_NVIDIA = true ]; then
+		sed -i 's/\(^options.*\)/\1 nvidia-drm.modeset=1/' /boot/loader/entries/arch.conf
+	fi
 fi
 
 exit 0
