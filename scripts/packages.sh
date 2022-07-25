@@ -45,7 +45,7 @@ development_packages=(
 
 font_packages=(
 	"ttf-cascadia-code"
-	"ttf-font_awesome"
+	"ttf-font-awesome"
 )
 
 all_packages=(
