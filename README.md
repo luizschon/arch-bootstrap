@@ -22,5 +22,5 @@ By default, the script uses [systemd-boot](https://wiki.archlinux.org/title/Syst
 Modify the `partitions.conf`, `user.conf` and `system.conf` files to your liking (using your favorite text editor) and run:
 
 ```
-$ zsh /scripts/setup.sh [OPTIONS]
+$ zsh setup.sh [OPTIONS]
 ```
