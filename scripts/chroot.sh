@@ -2,7 +2,7 @@
 
 . "/scripts/user.conf"
 
-$root_partition=$1
+root_partition=$1
 
 if [ $VERBOSE = true ]; then
 	# Variables loaded from the user.conf file
