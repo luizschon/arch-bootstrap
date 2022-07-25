@@ -69,7 +69,7 @@ essential_packages=(
 
 basic_packages=(
 	"man-db" "man-pages" "texinfo"
-	"networkmanager" 
+	"networkmanager"
 	"sudo" "zsh"
 )
 
@@ -84,7 +84,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 SCRIPT_DIR=/mnt/scripts
 mkdir -p $SCRIPT_DIR
-mv /arch-bootstrap $SCRIPT_DIR
+mv /scripts $SCRIPT_DIR
 
 arch-chroot /mnt /bin/zsh -c "VERBOSE=${VERBOSE}; GAMING=${GAMING}; AUR=${AUR}; GRUB=${GRUB}; DOTFILES=${DOTFILES}" /scripts/chroot.sh $root_partition
 
