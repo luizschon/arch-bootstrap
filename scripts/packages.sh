@@ -56,6 +56,7 @@ all_packages=(
 	${font_packages[@]}
 )
 
+pacman -Sy
 pacman --noconfirm -S ${all_packages[@]}
 
 gaming_packages=(
@@ -66,7 +67,7 @@ if [ $GAMING = true ]; then
 	pacman --noconfirm -S ${gaming_packages[@]}
 fi
 
-if [ $YAY = true ]; then
+if [ $AUR = true ]; then
 	zsh /scripts/aur.sh
 fi
 
