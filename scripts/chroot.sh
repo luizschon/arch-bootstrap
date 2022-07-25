@@ -34,12 +34,6 @@ ln -sf /usr/share/zoneinfo/${timezone} /etc/localtime
 hwclock --systohc
 systemctl enable systemd-timesyncd
 
-# Enable required services
-systemctl enable fstrim.timer
-systemctl enable NetworkManager
-systemctl enable lightdm.service
-systemctl enable bluetooth.service
-
 # Install packages
 zsh /scripts/packages.sh
 
@@ -62,5 +56,11 @@ echo "$username:$password" | chpasswd
 
 # disable root login
 passwd -l root
+
+# Enable required services
+systemctl enable fstrim.timer
+systemctl enable NetworkManager
+systemctl enable lightdm.service
+systemctl enable bluetooth.service
 
 exit
