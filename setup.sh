@@ -84,9 +84,9 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 SCRIPT_DIR=/mnt/scripts
 mkdir -p $SCRIPT_DIR
-mv /scripts user.conf system.conf $SCRIPT_DIR
+mv scripts/* user.conf system.conf $SCRIPT_DIR
 
-arch-chroot /mnt /bin/zsh -c "VERBOSE=${VERBOSE}; GAMING=${GAMING}; AUR=${AUR}; GRUB=${GRUB}; DOTFILES=${DOTFILES}" /scripts/chroot.sh $root_partition
+arch-chroot /mnt /bin/zsh -c "VERBOSE=${VERBOSE}; GAMING=${GAMING}; AUR=${AUR}; GRUB=${GRUB}; DOTFILES=${DOTFILES}; zsh /scripts/chroot.sh ${root_partition}" 
 
 rm -r $SCRIPT_DIR
 
