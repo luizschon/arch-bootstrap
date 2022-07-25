@@ -53,6 +53,10 @@ if [[ $threed_controller = "NVIDIA" ]]; then
 	is_nvidia=true
 	pacman --noconfirm -S ${nvidia_drivers[@]}
 	pacman --noconfirm -S ${prime_drivers[@]}
+
+	if [ $GAMING = true ]; then
+		pacman --noconfirm -S ${lib32_amd_drivers}
+	fi
 fi
 
 case $vga_controller in
@@ -92,6 +96,7 @@ if [ $is_nvidia = true ]; then
 	echo "------- Creating NVIDIA pacman hook and kernel param -------"
 
 	# Creates NVIDIA pacman hook
+	mkdir -p /etc/pacman.d/hooks
 cat > /etc/pacman.d/hooks/nvidia.hook << EOF
 [Trigger]
 Operation=Install
