@@ -110,4 +110,7 @@ Exec=/bin/sh -c 'while read -r trg; do case \$trg in linux) exit 0; esac; done; 
 EOF
 fi
 
+export IS_NVIDIA=$is_nvidia
+export IS_AMD=$is_amd
+
 exit
