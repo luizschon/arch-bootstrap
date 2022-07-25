@@ -1,5 +1,16 @@
 #! /bin/zsh
 
+# Configure pacman
+sed -i '/^\[options\]/a Color\nParallelDownloads = 5' /etc/pacman.conf
+sed
+
+# Enable multilib
+if [ $GAMING = true ]; then
+	MULTILIB_LINE=$(grep -n "\[multilib\]" /etc/pacman.conf | cut -d : -f1 )
+	LINEEND=$(($MULTILIB_LINE+1))
+	sed -i "${MULTILIB_LINE},${LINEEND} s/#*//" /etc/pacman.conf
+fi
+
 shell_packages=(
 	"zsh" "zsh-completions"
 	"tmux" "htop"
@@ -11,26 +22,23 @@ shell_packages=(
 gui_packages=(
 	"xorg" "xdg-user-dirs"
 	"lightdm" "lightdm-gtk-greeter"
-	"i3-gaps"
-	"rofi"
-	"nautilus"
-	"kitty"
+	"i3-gaps" "polybar" "rofi"
+	"nautilus" "feh"
+	"kitty" "alacritty"
 	"firefox" "chromium"
-	"emacs"
-	"discord"
-	"vlc"
+	"discord" "vlc"
 )
 
 multimedia_packages=(
 	"pipewire"
 	"pipewire-pulse"
-	"bluez"
+	"bluez" "blueman"
 	"bluez-utils"
 	"pavucontrol"
 )
 
 development_packages=(
-	"rust"
+	"rust" "go"
 	"gcc" "cmake" "clang" "gdb"
 	"python" "python-pip"
 )
@@ -44,4 +52,16 @@ all_packages=(
 
 pacman --noconfirm -S ${all_packages[@]}
 
-exit
+gaming_packages=(
+	"steam", "blender"
+)
+
+if [ $GAMING = true ]; then
+	pacman --noconfirm -S ${gaming_packages[@]}
+fi
+
+if [ $YAY = true ]; then
+	zsh /scripts/aur.sh
+fi
+
+exit 0
