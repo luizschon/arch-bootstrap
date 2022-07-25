@@ -2,7 +2,6 @@
 
 # Configure pacman
 sed -i '/^\[options\]/a Color\nParallelDownloads = 5' /etc/pacman.conf
-sed
 
 # Enable multilib
 if [ $GAMING = true ]; then
