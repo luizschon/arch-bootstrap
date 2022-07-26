@@ -60,20 +60,17 @@ all_packages=(
 	${font_packages[@]}
 )
 
-pacman -Sy
+pacman -Syy
 pacman --noconfirm -S archlinux-keyring
 pacman --noconfirm -S ${all_packages[@]}
 
 gaming_packages=(
 	"steam" "blender"
+	"gamemode"
 )
 
 if [ $GAMING = true ]; then
 	pacman --noconfirm -S ${gaming_packages[@]}
-fi
-
-if [ $AUR = true ]; then
-	zsh /scripts/aur.sh
 fi
 
 exit 0
