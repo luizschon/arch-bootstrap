@@ -9,6 +9,8 @@ aur_packages=(
 	"ttf-ms-win10-auto"
 	"ttf-fixedsys-excelsior-linux"
 	"apple_cursor"
+	"tela-circle-icon-theme-git"
+	"graphite-gtk-theme-rimless-git"
 )
 
 yay --noconfirm -S ${aur_packages[@]}
