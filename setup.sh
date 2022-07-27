@@ -1,14 +1,14 @@
 print_help() {
-	echo ""
-	echo "Usage: zsh $ZSH_ARGZERO [OPTIONS]"
-	echo ""
-	echo "\t--aur            => Install yay and AUR packages from aur.sh"
-	echo "\t-d | --dotfiles  => Install dotfiles from https://github.com/luizschonarth/dotfiles (this is a personal script afterall :P)"
-	echo "\t-g | --grub      => Set GRUB as the bootloader of choice instead of systemd-boot"
-	echo "\t--gaming         => Configures system use multilib and install some gaming packages"
-	echo "\t-h | --help      => Print this help message"
-	echo "\t-v | --verbose   => Enable verbose mode to print some debug information"
-	echo ""
+    echo ""
+    echo "Usage: zsh $ZSH_ARGZERO [OPTIONS]"
+    echo ""
+    echo "\t--aur            => Move AUR script to home directory to be manually executed after reboot"
+    echo "\t-d | --dotfiles  => Install dotfiles from https://github.com/luizschonarth/dotfiles (this is a personal script afterall :P)"
+    echo "\t-g | --grub      => Set GRUB as the bootloader of choice instead of systemd-boot"
+    echo "\t--gaming         => Configures system use multilib and install some gaming packages"
+    echo "\t-h | --help      => Print this help message"
+    echo "\t-v | --verbose   => Enable verbose mode to print some debug information"
+    echo ""
 }
 
 # Parse short and long opts
@@ -27,29 +27,29 @@ DOTFILES=false
 
 # Set variables
 while true; do
-	case "$1" in
-		-h | --help		) print_help; exit 0 ;;
-		-v | --verbose	) VERBOSE=true; shift ;;
-		--gaming		) GAMING=true; shift ;;
-		--aur		    ) AUR=true; shift ;;
-		-g | --grub	    ) GRUB=true; shift ;;
-		-d | --dotfiles ) DOTFILES=true; shift ;;
-		--				) shift ; break ;;
-		*				) break ;;
-	esac
+    case "$1" in
+        -h | --help     ) print_help; exit 0 ;;
+        -v | --verbose  ) VERBOSE=true; shift ;;
+        --gaming        ) GAMING=true; shift ;;
+        --aur           ) AUR=true; shift ;;
+        -g | --grub     ) GRUB=true; shift ;;
+        -d | --dotfiles ) DOTFILES=true; shift ;;
+        --              ) shift ; break ;;
+        *               ) break ;;
+    esac
 done
 
 . "./partitions.conf"
 
 if [ $VERBOSE = true ]; then
-	# Variables from the partitions.conf file
-	echo '----------------------------'
-	echo "ROOT: ${root_partition}" 
-	echo "EFI: ${efi_partition}" 
-	echo "SWAP: ${swap_partition}" 
-	echo "HOME: ${home_partition}" 
-	echo "VAR: ${var_partition}" 
-	echo '----------------------------'
+    # Variables from the partitions.conf file
+    echo '----------------------------'
+    echo "ROOT: ${root_partition}" 
+    echo "EFI: ${efi_partition}" 
+    echo "SWAP: ${swap_partition}" 
+    echo "HOME: ${home_partition}" 
+    echo "VAR: ${var_partition}" 
+    echo '----------------------------'
 fi
 
 # Mount the partition especified in partitions.conf
@@ -63,19 +63,19 @@ mount $root_partition /mnt
 timedatectl set-ntp true
 
 essential_packages=(
-	"base" "base-devel"
-	"linux" "linux-firmware"
+    "base" "base-devel"
+    "linux" "linux-firmware"
 )
 
 basic_packages=(
-	"man-db" "man-pages" "texinfo"
-	"networkmanager"
-	"sudo" "zsh"
+    "man-db" "man-pages" "texinfo"
+    "networkmanager"
+    "sudo" "zsh"
 )
 
 first_packages=(
-	${essential_packages[@]}
-	${basic_packages[@]}
+    ${essential_packages[@]}
+    ${basic_packages[@]}
 )
 
 pacstrap /mnt ${first_packages[@]}

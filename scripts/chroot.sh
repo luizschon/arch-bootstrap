@@ -63,4 +63,9 @@ systemctl enable NetworkManager
 systemctl enable lightdm.service
 systemctl enable bluetooth.service
 
+# Move AUR script to home dir
+if [ $AUR = true ]; then
+	mv /scripts/aur.sh /home/$username/
+fi
+
 exit
