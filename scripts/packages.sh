@@ -20,6 +20,7 @@ shell_packages=(
 	"git" "neovim" "vim"
 	"python-pywal"
 	"keychain" "brightnessctl"
+	"youtude-dl"
 )
 
 gui_packages=(
@@ -31,6 +32,7 @@ gui_packages=(
 	"firefox" "chromium"
 	"discord" "vlc"
 	"network-manager-applet"
+	"obs-studio"
 )
 
 multimedia_packages=(
@@ -39,6 +41,7 @@ multimedia_packages=(
 	"bluez" "blueman"
 	"bluez-utils"
 	"pavucontrol"
+	"flameshot"
 )
 
 development_packages=(
@@ -50,6 +53,8 @@ development_packages=(
 font_packages=(
 	"ttf-cascadia-code"
 	"ttf-font-awesome"
+	"noto-fonts-emoji"
+	"noto-fonts-cjk"
 )
 
 all_packages=(
