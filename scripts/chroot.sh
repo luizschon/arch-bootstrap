@@ -65,7 +65,7 @@ systemctl enable bluetooth.service
 
 # Move AUR script to home dir
 if [ $AUR = true ]; then
-	mv /scripts/aur.sh /home/$username/
+	zsh /scripts/aur.sh
 fi
 
 exit
