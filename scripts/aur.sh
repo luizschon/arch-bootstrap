@@ -8,7 +8,7 @@ install_pkg() {
 }
 
 aur_pkgs=(
-	"yay"
+	"yay" "eww"
 	"spotify" "nvm"
 	"ttf-ms-win10-auto"
 	"ttf-fixedsys-excelsior-linux"
