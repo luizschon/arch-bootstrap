@@ -38,6 +38,7 @@ if [ $DOTFILES = false ]; then
 
 	chmod +x /home/$username/.config/bspwm/bspwmrc
 	chmod +x /home/$username/.config/bspwm/help
+	chown -R $username:$username /home/$username/.config/bspwm
 fi
 
 exit
