@@ -17,32 +17,27 @@ pkgs=(
 	"tmux" "htop" "neofetch"
 	"openssh" "wget" "curl"
 	"zip" "unzip" "p7zip"
-	"git" "neovim" "vim"
-	"python-pywal"
+	"git" "neovim" "vim" "python-pywal"
 	"keychain" "brightnessctl"
 	"xorg" "xdg-user-dirs" "picom"
 	"lightdm" "lightdm-gtk-greeter"
 	"bspwm" "sxhkd" "rofi"
 	"nautilus" "feh"
-	"kitty" "rxvt-unicode" "mupdf"
+	"kitty" "mupdf"
 	"firefox" "chromium"
 	"discord" "vlc"
 	"network-manager-applet"
-	"pipewire"
-	"pipewire-pulse"
-	"bluez" "blueman"
-	"bluez-utils"
-	"pavucontrol"
-	"flameshot"
+	"pipewire-pulse" "pipewire"
+	"bluez" "blueman" "bluez-utils"
+	"pavucontrol" "flameshot"
 	"gcc" "cmake" "clang" "gdb"
 	"python" "python-pip"
-	"ttc-iosevka"
-	"ttf-font-awesome"
+	"ttf-font-awesome" "ttc-iosevka"
 	"noto-fonts-emoji"
 	"noto-fonts-cjk"
 )
 
-pacman -Syy
+pacman -Sy
 pacman --noconfirm -S archlinux-keyring
 pacman --noconfirm -S ${pkgs[@]}
 
