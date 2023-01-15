@@ -10,9 +10,9 @@ if [ $GAMING = true ]; then
 	sed -i "${MULTILIB_LINE},${LINEEND} s/#*//" /etc/pacman.conf
 fi
 
-shell_packages=(
+pkgs=(
 	"zsh" "zsh-completions"
-	"zsh-autosuggestion"
+	"zsh-autosuggestions"
 	"zsh-syntax-highlighting"
 	"tmux" "htop"
 	"openssh" "wget" "curl"
@@ -20,62 +20,41 @@ shell_packages=(
 	"git" "neovim" "vim"
 	"python-pywal"
 	"keychain" "brightnessctl"
-	"youtude-dl"
-)
-
-gui_packages=(
 	"xorg" "xdg-user-dirs" "picom"
 	"lightdm" "lightdm-gtk-greeter"
-	"i3-gaps" "polybar" "rofi"
+	"bspwm" "rofi"
 	"nautilus" "feh"
-	"kitty" "alacritty"
+	"kitty"
 	"firefox" "chromium"
 	"discord" "vlc"
 	"network-manager-applet"
-	"obs-studio"
-)
-
-multimedia_packages=(
 	"pipewire"
 	"pipewire-pulse"
 	"bluez" "blueman"
 	"bluez-utils"
 	"pavucontrol"
 	"flameshot"
-)
-
-development_packages=(
 	"rust" "go"
 	"gcc" "cmake" "clang" "gdb"
 	"python" "python-pip"
-)
-
-font_packages=(
+	"ttc-iosevka"
 	"ttf-cascadia-code"
 	"ttf-font-awesome"
 	"noto-fonts-emoji"
 	"noto-fonts-cjk"
 )
 
-all_packages=(
-	${shell_packages[@]}
-	${gui_packages[@]}
-	${multimedia_packages[@]}
-	${development_packages[@]}
-	${font_packages[@]}
-)
-
 pacman -Syy
 pacman --noconfirm -S archlinux-keyring
-pacman --noconfirm -S ${all_packages[@]}
+pacman --noconfirm -S ${pkgs[@]}
 
-gaming_packages=(
+gaming_pkgs=(
 	"steam" "blender"
 	"gamemode"
 )
 
 if [ $GAMING = true ]; then
-	pacman --noconfirm -S ${gaming_packages[@]}
+	pacman --noconfirm -S ${gaming_pkgs[@]}
 fi
 
 exit 0
