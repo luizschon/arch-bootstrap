@@ -1,10 +1,10 @@
-#! /bin/zsh
+#! usr/bin/zsh
 
 install_pkg() {
-	local pkg = $1
-	[ $VERBOSE = true ] && echo "\tInstalling ${pkg}"
-	git clone "https://aur.archlinux.org/${pkg}.git" && cd $pkg && makepkg -si PKGBUILD
-	cd .. && rm -r $pkg
+	local pkg=$1
+	[ $VERBOSE = true ] && echo "Installing ${pkg}"
+	git clone "https://aur.archlinux.org/${pkg}.git" && cd $pkg && makepkg -si --noconfirm PKGBUILD
+	cd .. && rm -rf $pkg
 }
 
 aur_pkgs=(
@@ -14,11 +14,12 @@ aur_pkgs=(
 	"ttf-fixedsys-excelsior-linux"
 	"mcmojave-cursors"
 	"mojave-gtk-theme"
-	"mcmojave-circle-icon-theme"
 )
 
 [ $VERBOSE = true ] && echo "Installing AUR packages."
 
-install_pkg ${aur_pkgs[@]}
+for pkg in $aur_pkgs; do
+	install_pkg $pkg
+done
 
 exit 0
