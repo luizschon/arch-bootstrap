@@ -9,7 +9,6 @@ if [ $VERBOSE = true ]; then
 	echo '----------------------------'
 	echo "HOSTNAME: ${hostname}" 
 	echo "USER: ${username}" 
-	echo "PASSWORD: ${password}" 
 	echo "TIMEZONE: ${timezone}" 
 	echo "KEYMAP: ${keymap}" 
 	echo "LANGUAGES: ${languages[@]}" 
@@ -63,8 +62,11 @@ systemctl enable NetworkManager
 systemctl enable lightdm.service
 systemctl enable bluetooth.service
 
+
 # Move AUR script to home dir
 if [ $AUR = true ]; then
+	su $username
+	echo "entering aur.sh"
 	zsh /scripts/aur.sh
 fi
 
