@@ -1,18 +1,24 @@
 #! /bin/zsh
 
-# Install yay package manager
-git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si PKGBUILD
-cd .. && rm -r yay
+install_pkg() {
+	local pkg = $1
+	[ $VERBOSE = true ] && echo "\tInstalling ${pkg}"
+	git clone "https://aur.archlinux.org/${pkg}.git" && cd $pkg && makepkg -si PKGBUILD
+	cd .. && rm -r $pkg
+}
 
-aur_packages=(
+aur_pkgs=(
+	"yay"
 	"spotify" "nvm"
 	"ttf-ms-win10-auto"
 	"ttf-fixedsys-excelsior-linux"
-	"apple_cursor"
-	"tela-circle-icon-theme-git"
-	"graphite-gtk-theme-rimless-git"
+	"mcmojave-cursors"
+	"mojave-gtk-theme"
+	"mcmojave-circle-icon-theme"
 )
 
-yay --noconfirm -S ${aur_packages[@]}
+[ $VERBOSE = true ] && echo "Installing AUR packages."
+
+install_pkg ${aur_pkgs[@]}
 
 exit 0
