@@ -1,0 +1,11 @@
+#! /bin/sh
+
+urxvt -e cat << EOM
+Hello! If you are seeing this message, you probably need to configure some stuff around.
+
+Check out the ${HOME}/.config/bspwm/bspwmrc and ${HOME}/.config/bspwm/sxhkdrc files to
+change the configurations and keybindings, or feel free to install a window manager/desktop
+environment of your preference.
+
+Press Win+Enter to open a terminal emulator or Win+d to open the application launcher.
+EOM
