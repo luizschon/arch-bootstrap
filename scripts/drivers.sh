@@ -1,4 +1,4 @@
-#! /bin/zsh
+#! /usr/bin/env zsh
 
 intel_drivers=(
 	"xf86-video-intel"
@@ -55,7 +55,7 @@ if [[ $threed_controller = "NVIDIA" ]]; then
 	pacman --noconfirm -S ${prime_drivers[@]}
 
 	if [ $GAMING = true ]; then
-		pacman --noconfirm -S ${lib32_amd_drivers}
+		pacman --noconfirm -S ${lib32_nvidia_drivers}
 	fi
 fi
 

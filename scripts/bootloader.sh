@@ -1,3 +1,5 @@
+#! /usr/bin/env zsh
+
 # Install Intel/AMD Microcode
 cpu_vendor=$(lscpu | perl -ne 'print "$1" if /^Vendor ID:[^a-zA-Z]*(.*)/')
 

@@ -1,4 +1,4 @@
-#! /bin/zsh
+#! /usr/bin/env zsh
 
 # Configure pacman
 sed -i '/^\[options\]/a Color\nParallelDownloads = 5' /etc/pacman.conf
@@ -10,40 +10,37 @@ if [ $GAMING = true ]; then
 	sed -i "${MULTILIB_LINE},${LINEEND} s/#*//" /etc/pacman.conf
 fi
 
-pkgs=(
+required_pkgs=(
+	"xdg-user-dirs" "openssh" "gnupg"
+	"lightdm" "lightdm-gtk-greeter"
+	"pipewire-pulse" "pipewire"
+	"bluez" "bluez-utils"
+)
+
+cli_pkgs=(
 	"zsh" "zsh-completions"
 	"zsh-autosuggestions"
-	"zsh-syntax-highlighting"
-	"tmux" "htop" "neofetch"
-	"openssh" "wget" "curl"
+	"fish" "starship"
+	"htop" "fastfetch"
+	"wget" "curl"
 	"zip" "unzip" "p7zip"
-	"git" "neovim" "vim" "python-pywal"
-	"keychain" "brightnessctl"
-	"xorg" "xdg-user-dirs" "picom"
-	"lightdm" "lightdm-gtk-greeter"
-	"bspwm" "sxhkd" "rofi"
-	"nautilus" "feh"
-	"kitty" "mupdf"
-	"firefox" "chromium"
-	"discord" "vlc"
-	"network-manager-applet"
-	"pipewire-pulse" "pipewire"
-	"bluez" "blueman" "bluez-utils"
-	"pavucontrol" "flameshot"
-	"gcc" "cmake" "clang" "gdb"
-	"python" "python-pip"
-	"ttf-font-awesome" "ttc-iosevka"
+	"git" "neovim" "vi"
+	"keychain" "hexyl" "gcc"
+	"clang" "gdb" "python"
+)
+
+gui_pkgs=(
+	"wezterm" "chromium"
 	"noto-fonts-emoji"
 	"noto-fonts-cjk"
 )
 
 pacman -Sy
 pacman --noconfirm -S archlinux-keyring
-pacman --noconfirm -S ${pkgs[@]}
+pacman --noconfirm -S ${required_pkgs[@]} ${cli_pkgs[@]} ${gui_pkgs[@]}
 
 gaming_pkgs=(
-	"steam" "blender"
-	"gamemode"
+	"steam" "mangohud" "gamemode"
 )
 
 if [ $GAMING = true ]; then

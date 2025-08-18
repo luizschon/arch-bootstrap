@@ -1,4 +1,4 @@
-#! /bin/zsh
+#! /usr/bin/env zsh
 
 . "/scripts/user.conf"
 
@@ -7,11 +7,11 @@ root_partition=$1
 if [ $VERBOSE = true ]; then
 	# Variables loaded from the user.conf file
 	echo '----------------------------'
-	echo "HOSTNAME: ${hostname}" 
-	echo "USER: ${username}" 
-	echo "TIMEZONE: ${timezone}" 
-	echo "KEYMAP: ${keymap}" 
-	echo "LANGUAGES: ${languages[@]}" 
+	echo "HOSTNAME: ${hostname}"
+	echo "USER: ${username}"
+	echo "TIMEZONE: ${timezone}"
+	echo "KEYMAP: ${keymap}"
+	echo "LANGUAGES: ${languages[@]}"
 	echo '----------------------------'
 fi
 
@@ -50,7 +50,7 @@ zsh /scripts/system_config.sh
 sed -i '0,/%wheel/s/^# //' /etc/sudoers
 
 # Create wheel user
-useradd -mG wheel,storage,power,video,audio $username
+useradd -mG wheel,storage,power,video,audio,games,docker $username
 echo "$username:$password" | chpasswd
 
 # disable root login
@@ -59,8 +59,8 @@ passwd -l root
 # Enable required services
 systemctl enable fstrim.timer
 systemctl enable NetworkManager
-systemctl enable lightdm.service
 systemctl enable bluetooth.service
+systemctl enable lightdm.service
 
 # Change to user to set $HOME env and install aur packages
 su $username

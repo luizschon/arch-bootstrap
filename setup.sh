@@ -1,3 +1,5 @@
+#! /usr/bin/env zsh
+
 print_help() {
     echo ""
     echo "Usage: zsh $ZSH_ARGZERO [OPTIONS]"
@@ -44,11 +46,11 @@ done
 if [ $VERBOSE = true ]; then
     # Variables from the partitions.conf file
     echo '----------------------------'
-    echo "ROOT: ${root_partition}" 
-    echo "EFI: ${efi_partition}" 
-    echo "SWAP: ${swap_partition}" 
-    echo "HOME: ${home_partition}" 
-    echo "VAR: ${var_partition}" 
+    echo "ROOT: ${root_partition}"
+    echo "EFI: ${efi_partition}"
+    echo "SWAP: ${swap_partition}"
+    echo "HOME: ${home_partition}"
+    echo "VAR: ${var_partition}"
     echo '----------------------------'
 fi
 
@@ -68,7 +70,7 @@ essential_packages=(
 )
 
 basic_packages=(
-    "man-db" "man-pages" "texinfo"
+    "man-db" "man-pages" "neovim"
     "networkmanager"
     "sudo" "zsh"
 )
@@ -92,7 +94,7 @@ export GAMING=${GAMING};
 export AUR=${AUR};
 export GRUB=${GRUB};
 export DOTFILES=${DOTFILES};
-zsh /scripts/chroot.sh ${root_partition}" 
+zsh /scripts/chroot.sh ${root_partition}"
 
 rm -r $SCRIPT_DIR
 

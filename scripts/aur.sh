@@ -1,4 +1,4 @@
-#! usr/bin/zsh
+#! /usr/bin/env zsh
 
 install_pkg() {
 	local pkg=$1
@@ -8,12 +8,9 @@ install_pkg() {
 }
 
 aur_pkgs=(
-	"yay" "eww"
+	"yay"
 	"spotify" "nvm"
 	"ttf-ms-win10-auto"
-	"ttf-fixedsys-excelsior-linux"
-	"mcmojave-cursors"
-	"mojave-gtk-theme"
 )
 
 [ $VERBOSE = true ] && echo "Installing AUR packages."
