@@ -16,48 +16,27 @@ nvidia_drivers=(
 amd_drivers=(
 	"xf86-video-amdgpu"
 	"vulkan-radeon"
-	"libva-mesa-driver"
 	"mesa"
-)
-
-prime_drivers=(
-	"nvidia-prime"
 )
 
 lib32_nvidia_drivers=(
 	"lib32-nvidia-utils"
+	"lib32-mesa"
 )
 
 lib32_amd_drivers=(
-	"lib32-mesa"
 	"lib32-vulkan-radeon"
+	"lib32-mesa"
 )
 
 lib32_intel_drivers=(
 	"lib32-mesa"
 )
 
-universal_drivers=(
-	"mesa"
-)
-
 is_nvidia=false
 is_amd=false
 vga_controller=$(lspci -d ::0300 | sed 's/^.*: //' | awk '{print $1}')
-threed_controller=$(lspci -d ::0302 | sed 's/^.*: //' | awk '{print $1}')
 display_controller=$(lspci -d ::0380 | sed 's/^.*: //' | awk '{print $1}')
-
-if [[ $threed_controller = "NVIDIA" ]]; then
-	echo "---------- Detected NVIDIA 3D controller ----------"
-	echo "---------- Installing NVIDIA and PRIME drivers ----------"
-	is_nvidia=true
-	pacman --noconfirm -S ${nvidia_drivers[@]}
-	pacman --noconfirm -S ${prime_drivers[@]}
-
-	if [ $GAMING = true ]; then
-		pacman --noconfirm -S ${lib32_nvidia_drivers}
-	fi
-fi
 
 case $vga_controller in
 	"Intel")
@@ -87,8 +66,6 @@ case $vga_controller in
 		fi
 		;;
 	* )
-		echo "---------- Installing universal drivers ----------"
-		pacman --noconfirm -S ${universal_drivers[@]}
 		;;
 esac
 
